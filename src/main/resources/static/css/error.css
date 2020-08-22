@@ -1,0 +1,203 @@
+:root {
+    --body-background: linear-gradient(180deg, #b7333340, rgba(21, 254, 82, 0));
+    --login-prompt-bgcolor: #fff8f0;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: auto;
+    background: white;
+    color: #999;
+    font: 12px/150% Arial, Verdana, "\5b8b\4f53";
+    font-style: normal;
+    font-variant-ligatures: normal;
+    font-variant-caps: normal;
+    font-variant-numeric: normal;
+    font-variant-east-asian: normal;
+    font-weight: normal;
+    font-stretch: normal;
+    font-size: 12px;
+    line-height: 150%;
+    font-family: Arial, Verdana, 宋体;
+}
+
+#error-header {
+    width: 100%;
+    height: 80px;
+}
+
+.row {
+    height: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    /*margin-right: 0px !important;*/
+    /*margin-left: 0px !important;*/
+}
+
+#error-header-row-1 {
+    height: 110px;
+    box-shadow: -4px 3px 11px 2px;
+}
+
+
+
+a {
+    color: #666;
+    text-decoration: none;
+}
+
+#error-header-center {
+    height: 100%;
+}
+
+.error-header-center-left {
+    padding-left: 55px;
+}
+
+.error-header-center-left-img {
+    padding-top: 10px
+}
+
+.error-header-center-center{
+    position: relative;
+}
+
+.error-header-center-center {
+    padding-left: 60px;
+}
+
+#error-header-center-center-div {
+    font-size: 30px;
+    color: black;
+    font-family: -webkit-body;
+    line-height: 80px;
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.error-header-center-right {
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 10px;
+    padding-left: 160px;
+
+}
+
+.error-header-center-right > div {
+    width: 100%;
+    height: 18px;
+}
+
+#error-header-row-2 i {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: -3px;
+    background-image: url("/image/login/icon-tips.png");
+}
+
+#error-header-row-3 {
+    height: 475px;
+    margin-top: 50px;
+}
+
+
+
+.lxfs-div b {
+    width: 19px;
+    height: 18px;
+    display: inline-block;
+    position: relative;
+    margin-bottom: -3px;
+
+}
+
+.enter-button input {
+    border: 1px solid #e85356;
+    width: 303px;
+    height: 33px !important;
+    background: #e4393c;
+    line-height: 31px;
+    color: #fff;
+    font-size: 20px;
+    font-family: 'Microsoft YaHei';
+}
+
+.links a {
+    margin: 0px 10px 0px 10px;
+}
+
+#foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 90px;
+    flex-direction: column;
+}
+
+
+#prompt-head > div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+#error-main-left-big{
+    display: flex;
+    flex-direction: column;
+    height: 475px;
+    box-shadow: -3px 7px 11px 2px;
+}
+#error-main-left-one, #error-main-right-one{
+    width:100%;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    font-size: 24px;
+    font-family: '微软雅黑';
+    color: black;
+    opacity: 0.8;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#error-main-left-two{
+    width: 100%;
+    height: 375px;
+    background: url(/image/error/veer-375301152.jpg);
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+    background-size: contain;
+}
+#error-main-right-big{
+    height: 475px;
+    box-shadow: -3px 7px 11px 2px;
+}
+#error-main-right-two{
+    width: 100%;
+    height: 375px;
+}
+#error-message{
+    height: 100%;
+    font-family: '微软雅黑';
+    font-size: 14px;
+    line-height: 26px;
+    margin-left: 20px;
+}
+#login-header-row-4{
+    margin-top:200px;
+}
+.links{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}

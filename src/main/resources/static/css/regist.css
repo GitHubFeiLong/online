@@ -1,0 +1,346 @@
+:root {
+    --body-background: linear-gradient(180deg, #b7333340, rgba(21, 254, 82, 0));
+    --login-prompt-bgcolor: #fff8f0;
+}
+
+/*平板*/
+@media only screen and (max-width: 768px) {
+    .login-header-center-left{
+        padding-left: 0px !important;
+    }
+    .login-header-center-center{
+        display: flex;
+        justify-content: center;
+    }
+    .login-header-center-right{
+        padding-left: 0px !important;
+    }
+
+}
+
+/*平板Pro*/
+@media only screen and (max-width: 1024px) {
+    #login-header-center-center-div{
+        right: 65%;
+    }
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: auto;
+    background: white;
+    color: #999;
+    font: 12px/150% Arial, Verdana, "\5b8b\4f53";
+    font-style: normal;
+    font-variant-ligatures: normal;
+    font-variant-caps: normal;
+    font-variant-numeric: normal;
+    font-variant-east-asian: normal;
+    font-weight: normal;
+    font-stretch: normal;
+    font-size: 12px;
+    line-height: 150%;
+    font-family: Arial, Verdana, 宋体;
+}
+
+#login-header {
+    width: 100%;
+    height: 80px;
+}
+
+.row {
+    height: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    /*margin-right: 0px !important;*/
+    /*margin-left: 0px !important;*/
+}
+
+#login-header-row-1 {
+    height: 110px;
+    box-shadow: -4px 3px 11px 2px;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    background: white;
+}
+
+
+
+a {
+    color: #666;
+    text-decoration: none;
+}
+
+#login-header-center {
+    height: 100%;
+}
+
+.login-header-center-left {
+    padding-left: 55px;
+}
+
+.login-header-center-left-img {
+    padding-top: 10px
+}
+
+.login-header-center-center{
+    position: relative;
+}
+
+.login-header-center-center {
+    padding-left: 60px;
+}
+
+#login-header-center-center-div {
+    font-size: 30px;
+    color: black;
+    font-family: -webkit-body;
+    line-height: 80px;
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.login-header-center-right {
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 10px;
+    padding-left: 160px;
+
+}
+
+.login-header-center-right > div {
+    width: 100%;
+    height: 18px;
+}
+
+#login-header-row-2 i {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: -3px;
+    background-image: url("/image/login/icon-tips.png");
+}
+
+#login-header-row-3 {
+    height: 475px;
+    margin-top: 140px;
+}
+
+#login-body {
+    height: 100%;
+}
+
+.login-body-bg {
+    height: 475px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#login-body-info {
+    z-index: 4;
+    width: 400px;
+    height: 428px;
+    top: 15px;
+    font-size: 12px;
+    text-align: center;
+    line-height: 40px;
+    position: relative;
+}
+
+.lxfs-div b {
+    width: 19px;
+    height: 18px;
+    display: inline-block;
+    position: relative;
+    margin-bottom: -3px;
+
+}
+
+.enter-button input {
+    border: 1px solid #e85356;
+    width: 303px;
+    height: 33px !important;
+    background: #e4393c;
+    line-height: 31px;
+    color: #fff;
+    font-size: 20px;
+    font-family: 'Microsoft YaHei';
+}
+
+.links a {
+    margin: 0px 10px 0px 10px;
+}
+
+#foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 90px;
+    flex-direction: column;
+}
+
+#head-right-div{
+    position: relative;
+    margin-bottom: 19px;
+    font-size: 16px;
+    font-weight: 600;
+}
+#prompt-head{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width:400px;
+    height:55px;
+}
+#prompt-head > div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.regist-one{
+    width: 400px;
+    height: 86px;
+    margin-top: 40px;
+}
+.regist-two{
+    width: 400px;
+    height: 86px;
+    margin-top: 20px;
+}
+
+.regist-three{
+    width: 400px;
+    height: 86px;
+    margin-top: 20px;
+}
+#regist-three-div{
+    width: 400px;
+    height: 52px;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+}
+#regist-password{
+    width: 300px;
+    height: 46px;
+    padding-left: 20px;
+    font-size: 18px;
+}
+
+.regist-four{
+    width: 400px;
+    height: 54px;
+    margin-top: 20px;
+    background: #e2231a;
+    font-size: 20px;
+    line-height: 54px;
+    color: white;
+    font-family: "Microsoft YaHei","Hiragino Sans GB";
+    cursor: pointer;
+}
+.regist-four:hover{
+    background: #c81623;
+}
+.regist-username-label{
+    width:75px;
+    height:46px;
+    background: url(/image/regist/regist-user.png);
+    background-size: 65% 100%;
+    background-position-x: center;
+    background-position-y: center;
+    background-repeat: no-repeat;
+}
+.regist-password-label{
+    width:75px;
+    height:46px;
+    background: url('/image/regist/regist-password.png');
+    background-size: 65% 100%;
+    background-position-x: center;
+    background-position-y: center;
+    background-repeat: no-repeat;
+}
+.regist-pin-label{
+    width:75px;
+    height:46px;
+    background: url(/image/regist/regist-yzm.png);
+    background-size: 65% 100%;
+    background-position-x: center;
+    background-position-y: center;
+    background-repeat: no-repeat;
+}
+#regist-username{
+    width:300px;
+    height:46px;
+    padding-left: 20px;
+    font-size:18px;
+}
+#regist-pin{
+    width:300px;
+    height:46px;
+    padding-left: 20px;
+    font-size:18px;
+}
+#regist-one-div{
+    width: 400px;
+    height: 52px;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+}
+#regist-two-div{
+    width: 400px;
+    height: 52px;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+}
+
+#login-header-row-4{
+    margin-top: 200px;
+}
+.prompt-head-circle{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #9e9e9e;
+    text-align: center;
+    line-height: 24px;
+    color: white;
+}
+.regist-error{
+    text-align: left;
+    margin-left: 86px;
+    margin-top: -5px;
+    display:none;
+}
+.error{
+    display:block;
+    color:red;
+}
+.success{
+    display:block;
+    color:green;
+}
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12{
+    padding-right: 0px;
+    padding-left: 0px;
+}
+.links{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+/*表单上面的流程线*/
+.prompt-head-line{
+    margin-top: -40px;
+    width: 100%;
+}

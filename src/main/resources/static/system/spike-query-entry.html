@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style>
+        .app{
+            width: 100%;
+        }
+        .page-header-title{
+            display: block;
+            text-align: center;
+        }
+        .flex-container{
+            display: flex;
+            justify-content: flex-start;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        .width-half{
+            width: 350px;
+            text-align: left;
+        }
+        .add-btn-div{
+            text-align: center;
+            height: 30px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="app" id="spike-query-entry-app">
+        <h3 class="page-header-title">秒杀时间管理</h3>
+
+        <div class="form-inline flex-container my-from">
+            <div class="width-half">
+                <label for="spike-name">秒杀名字：</label>
+                <input v-model="spikeName" type="text" class="form-control" id="spike-name" placeholder="08:00" autocomplete="off" required>
+            </div>
+            <div class="width-half">
+                <label class="margin-left-label" class="form-inline" for="spike-describe" required>秒杀描述：</label>
+                <input v-model="spikeDescribes" type="text" class="form-control" id="spike-describe" placeholder="早上8点开枪两个小时">
+            </div>
+            <div class="width-half">
+                <label for="spike-start-time">开始时间：</label>
+                <!--指定 date标记-->
+                <div class='input-group date' id='spike-start-time'>
+                    <input id="spikeStartTime" required type='text' class="form-control" placeholder="08:00" autocomplete="off"/>
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+                </div>
+            </div>
+            <div class="width-half">
+                <label for="spike-end-time">结束时间：</label>
+                <!--指定 date标记-->
+                <div class='input-group date' id='spike-end-time'>
+                    <input id="spikeEndTime" required type='text' class="form-control" placeholder="10:00" autocomplete="off"/>
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+                </div>
+            </div>
+            <div class="add-btn-div">
+                <button @click="addSpikeData()" type="button" class="btn btn-primary margin-left-label" >添加</button>
+            </div>
+        </div>
+
+
+        <div class="body-2">
+            <table id="spike-query-entry-table" class="table table-bordered table-hover"></table>
+        </div>
+    </div>
+
+
+
+    <script type="text/javascript">
+
+        // bootstrapTable($('#theme-query-table'),"/system/themeQuery",{},columns);
+        var spikeVm;
+        $(function(){
+            $('#spike-start-time').datetimepicker({
+                format: 'HH:mm',
+                locale: moment.locale('zh-cn')
+            });
+            $('#spike-end-time').datetimepicker({
+                format: 'HH:mm',
+                locale: moment.locale('zh-cn')
+            });
+            var columns=[
+                {   title:'序号',
+                    align: 'center',
+                    width: 5,
+                    formatter: function (value, row, index) {
+                        return index+1;
+                    }
+                },
+                {
+                    title:'秒杀名称',
+                    field:'spikeName',
+                    align: 'left',
+                    width: 10,
+                    sortable: true, // 是否排序
+                    sortName: "spike_name",
+                    formatter:function(value , row, index){
+                        return `<span>${value}</span>`;
+                    }
+                },
+                {
+                    title:'秒杀开始时间',
+                    field:'spikeStartTime',
+                    align: 'left',
+                    width: 20,
+                    sortable: true,
+                    sortName: "spike_start_time",
+                    formatter:function(value,row,index){
+                        return `<span>${value}</span>`
+                    }
+                },
+                {
+                    title:'秒杀结束时间',
+                    field:'spikeEndTime',
+                    align: 'left',
+                    width: 40,
+                    sortable: true,
+                    sortName: "spike_end_time",
+                    formatter:function(value , row, index){
+                        return `<span>${value}</span>`;
+                    }
+                },
+                {
+                    title:'秒杀描述',
+                    field:'describes',
+                    align: 'left',
+                    width: 10,
+                    sortable: true,
+                    formatter:function(value , row, index){
+                        return `<span>${value}</span>`;
+                    }
+                },
+                {
+                    title:'录入时间',
+                    field:'createTime',
+                    align: 'center',
+                    sortable: true,
+                    sortName: "create_time",
+                    width: 20,
+                },
+                {
+                    title:"最后修改时间",
+                    field:'modifiedTime',
+                    align: 'center',
+                    width: 20,
+                    sortable: true,
+                    sortName: "modified_time",
+                },
+                {
+                    title:"操作",
+                    align: 'center',
+                    width: 30,
+                    formatter: vm.$options.methods.operateFormatter
+                }
+            ]
+            bootstrapTable($('#spike-query-entry-table'), "/system/spikeQuery",{},columns);
+
+            spikeVm = vm;
+        })
+
+
+
+        /**
+         * 调用Vue更新秒杀信息
+         */
+        function updateSpike(rowId, obj) {
+            // spikeVm.updateSpike(rowId, obj);
+
+            console.log("点击修改", rowId);
+            // 按钮
+            var $btn = $(obj)
+            // 秒杀名称
+            var $spikeName = $(obj).parent().parent().parent().parent().children('td').eq(1).find('span');
+            // 秒杀开始时间
+            var $spikeStartTime = $(obj).parent().parent().parent().parent().children('td').eq(2).find('span');
+
+            // 秒杀结束时间
+            var $spikeEndTime = $(obj).parent().parent().parent().parent().children('td').eq(3).find('span');
+
+            // 秒杀描述
+            var $spikeDescribes = $(obj).parent().parent().parent().parent().children('td').eq(4).find('span');
+
+            // 保存修改前的值
+            if ($btn.attr("click-type") != 1) { // 第一次点击是修改
+                $btn.html("保 存");
+                $btn.attr("click-type","1"); // 保存按钮 属性是1
+                $btn.removeClass("btn-info");
+                $btn.addClass("btn-success");
+
+
+                $spikeName.editable({
+                    type: 'text', //编辑框的类型。支持text|textarea|select|date|checklist等
+                    title: '输入新的秒杀名称',
+                    validate: function (v) {
+                        if (!v) {
+                            return '名称不能为空';
+                        }
+                    }
+                });
+                // TODO 这两个的时间下拉选未实现
+                $spikeStartTime.editable({
+                    type: 'text',
+                    title: '请输入开始时间',
+                    validate: function (v) {
+                        if (!v) {
+                            return '开始时间不能为空';
+                        }
+                    }
+                });
+                $spikeEndTime.editable({
+                    type: 'text',
+                    title: '请输入结束时间',
+                    validate: function (v) {
+                        if (!v) {
+                            return '结束时间不能为空';
+                        }
+                    }
+                });
+                $spikeDescribes.editable({
+                    type: 'text',
+                    title: '请输入秒杀描述',
+                    validate: function (v) {
+                        /*if (!v) {
+                            return '秒杀描述';
+                        }*/
+                    }
+                });
+
+            } else { // 保存
+                // 这里获取的是为保存的值
+                var row = $('#spike-query-entry-table').bootstrapTable('getRowByUniqueId', rowId);
+                console.log("row", row);
+                $btn.html("修 改");
+                $btn.attr("click-type","0");
+                $btn.removeClass("btn-success");
+                $btn.addClass("btn-info");
+
+                // 取消表格可编辑状态
+                editableAllDestory([$spikeName, $spikeStartTime, $spikeEndTime, $spikeDescribes]);
+
+                // 修改最后修改时间
+                var $modifiedTime = $(obj).parent().parent().parent().parent().children('td').eq(6);
+
+
+
+
+                // 判断数据是否发生了改变
+                 let isChange = row.spikeName != $spikeName.text() ||  row.spikeStartTime != $spikeStartTime.text()
+                     || row.spikeEndTime != $spikeEndTime.text()  || row.describes != $spikeDescribes.text() ;
+                 if (isChange) {
+                     $modifiedTime.text(nowDateToString());
+                     $.ajax({
+                         url:"/system/updateSpike",
+                         data:{
+                             id: rowId,
+                             spikeName: $spikeName.text(),
+                             spikeStartTime: $spikeStartTime.text(),
+                             spikeEndTime: $spikeEndTime.text(),
+                             describes: $spikeDescribes.text(),
+                             modifiedTime: $modifiedTime.text()
+                         },
+                         dataType:"json",
+                         headers: {token : TOKEN},
+                         type:"post",
+                         success:function(data){
+                             if (data.code != "00000") {
+                                 swal("修改失败!", {
+                                     icon: "warning",
+                                 });
+                             } else {
+                                 swal("修改成功!", {
+                                     icon: "success",
+                                 });
+                             }
+                         }
+                     })
+                 } else {
+                     /*swal("修改成功!", {
+                         icon: "success",
+                     });*/
+                 }
+
+
+            }
+
+        }
+
+        /**
+         * 调用Vue删除秒杀信息
+         */
+        function removeSpike(rowId){
+            spikeVm.removeSpike(rowId);
+        }
+
+    </script>
+
+    <!--VUE相关-->
+    <script type="text/javascript">
+
+        var vm = new Vue({
+           el:"#spike-query-entry-app",
+           data:{
+               spikeName:"",    // 秒杀名字
+               spikeDescribes:"",// 秒杀描述
+           },
+           methods:{
+               addSpikeData(){ // 添加秒杀数据
+                    let isSuccess = systemVM.$options.methods.checkRequiredFormControl($(".my-from"))
+                    if (isSuccess) {
+                        var param = {
+                            spikeName:this.spikeName,
+                            describes:this.spikeDescribes,
+                            spikeStartTime: $("#spikeStartTime").val(),
+                            spikeEndTime: $("#spikeEndTime").val(),
+                        }
+                        this.$http.post('/system/spikeEnter', param, {emulateJSON:true}).then(function(result){
+                            // 通过 result.body拿到服务器返回的成功的数据
+                            let data = result.body;
+                            if (data.code == "00000") { // 成功 刷新
+                                $('#spike-query-entry-table').bootstrapTable('refresh');
+                            } else {
+                                // 错误，跳转错误页面
+                                setErrorDataToLocalStorage(data);
+                            }
+                        });
+                    }
+                    // console.log("点击了添加 秒杀数据");
+                },
+               operateFormatter(value, row, index){  // 操作栏 的转换
+                   let arr_start = [
+                       '<div class="operate-btn-group btn-group-my">',
+                   ];
+                   // 按钮1
+                   let arr_btn_1 = [
+                       '<div class="td-btn-div">',
+                       `<button type="button" class="btn btn-info update-btn"  singleSelected=true onclick="updateSpike(${row.id}, this)">修 改</button>`,
+                       '</div>'
+                   ]
+                   // 按钮2
+                   let arr_btn_2 = [
+                       '<div class="td-btn-div">',
+                       `<button type="button" class="btn btn-danger"  singleSelected=true onclick="removeSpike(${row.id})">删 除</button>`,
+                       '</div>'
+                   ]
+                   let arr_end = [
+                       '</div>',
+                   ];
+
+                   return arr_start.concat(arr_btn_1).concat(arr_btn_2).concat(arr_end).join('');
+               },
+               updateSpike(rowId, obj){
+                    console.log("点击修改", rowId);
+                   // 按钮
+                   var $btn = $(obj)
+                   // 秒杀名称
+                   var $spikeName = $(obj).parent().parent().parent().parent().children('td').eq(1).find('span');
+                   // 秒杀开始时间
+                   var $spikeStartTime = $(obj).parent().parent().parent().parent().children('td').eq(2).find('span');
+
+                   // 秒杀结束时间
+                   var $spikeEndTime = $(obj).parent().parent().parent().parent().children('td').eq(3).find('span');
+
+                   // 秒杀描述
+                   var $spikeDescribes = $(obj).parent().parent().parent().parent().children('td').eq(4).find('span');
+
+                   // 保存修改前的值
+                   if ($btn.attr("click-type") != 1) { // 第一次点击是修改
+                       $btn.html("保 存");
+                       $btn.attr("click-type","1"); // 保存按钮 属性是1
+                       $btn.removeClass("btn-info");
+                       $btn.addClass("btn-success");
+
+
+                       $spikeName.editable({
+                           type: 'text', //编辑框的类型。支持text|textarea|select|date|checklist等
+                           title: '输入新的秒杀名称',
+                           validate: function (v) {
+                               if (!v) {
+                                   return '名称不能为空';
+                               }
+                           }
+                       });
+                       $spikeStartTime.editable({
+                           type: 'date',
+                           // clear:false,
+                           // format: "HH:mm",
+                           title: '请输入开始时间',
+                           validate: function (v) {
+                               if (!v) {
+                                   return '开始时间不能为空';
+                               }
+                           }
+                       });
+                       $spikeEndTime.editable({
+                           type: 'date',
+                           title: '请输入结束时间',
+                           validate: function (v) {
+                               if (!v) {
+                                   return '结束时间不能为空';
+                               }
+                           }
+                       });
+                       $spikeDescribes.editable({
+                           type: 'text',
+                           title: '请输入秒杀描述',
+                           validate: function (v) {
+                               /*if (!v) {
+                                   return '秒杀描述';
+                               }*/
+                           }
+                       });
+
+                   } else { // 保存
+                       // 这里获取的是为保存的值
+                       var row = $('#spike-query-entry-table').bootstrapTable('getRowByUniqueId', rowId);
+
+                       $btn.html("修 改");
+                       $btn.attr("click-type","0");
+                       $btn.removeClass("btn-success");
+                       $btn.addClass("btn-info");
+
+                       editableDestory($spikeName);
+                       // 修改最后修改时间
+                       var $modifiedTime = $(obj).parent().parent().parent().parent().children('td').eq(6);
+
+                       $modifiedTime.text(nowDateToString());
+
+                       // console.log($theme.text(), $describes.text(),$modifiedTime.text());
+
+                       // 判断数据是否发生了改变
+                      /* let isChange = row.describes != $describes.text() ||  row.theme != $theme.text();
+                       if (isChange) {
+                           $.ajax({
+                               url:"/system/updateTheme",
+                               data:{id:id,theme:$theme.text(), describes: $describes.text(),modifiedTime:$modifiedTime.text()},
+                               dataType:"json",
+                               headers: {token : TOKEN},
+                               type:"post",
+                               success:function(data){
+                                   if (data.code != "00000") {
+                                       swal("修改失败!", {
+                                           icon: "warning",
+                                       });
+                                   } else {
+                                       swal("修改成功!", {
+                                           icon: "success",
+                                       });
+                                   }
+                               }
+                           })
+                       } else {
+                           swal("修改成功!", {
+                               icon: "success",
+                           });
+                       }*/
+
+
+                   }
+               },
+               removeSpike(rowId){
+                   console.log("点击了删除", rowId);
+                   let param = {
+                       id : rowId
+                   }
+                   spikeVm.$http.post('/system/removeSpike', param, {emulateJSON:true}).then(result=>{
+                       let data = result.body;
+                       if (data.code == "00000") {
+                           $('#spike-query-entry-table').bootstrapTable('refresh');
+                       } else {
+                           // 错误，跳转错误页面
+                           setErrorDataToLocalStorage(data);
+                       }
+                   })
+               }
+            },
+
+        });
+
+
+    </script>
+</body>
+
+</html>

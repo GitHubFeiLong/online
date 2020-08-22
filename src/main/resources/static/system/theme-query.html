@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #theme-query-app{
+            width:100%;
+            height:100%;
+            background-color: white;
+        }
+        h3 {
+            text-align: center;
+        }
+
+        #theme-query-color{
+            width:100px;
+        }
+        label{
+            margin-left:0;
+        }
+        .margin-left-label{
+            margin-left: 50px;
+        }
+        .query-body-1,query-body-2{
+            margin: 15px 0;
+        }
+        #theme-query-color-show{
+            background-color: rgba(0,0,0,0);
+        }
+        .table{
+            table-layout: fixed;
+        }
+        #theme-query-table tr td:nth-child(3) .bgcolor{
+            display: inline-block;
+            width:30%;
+            height: 20px;
+            float: right;
+        }
+        .td-btn-div{
+            width:30%;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="queryApp" id="theme-query-app">
+        <h3 id="title">主题查询</h3>
+        <div class="form-inline query-body-1">
+            <label for="theme-query-name">主题名称：</label>
+            <input type="text" class="form-control" id="theme-query-name" placeholder="主题名称" autocomplete="off" required>
+
+            <!-- <label class="margin-left-label" for="theme-query-color">主题颜色：</label>
+            <input type="text" class="form-control" id="theme-query-color" placeholder="#000000" required>
+            <input type="button" class="form-control" id="theme-query-color-show">-->
+
+            <div class="form-group">
+                <label class="margin-left-label" class="form-inline" for="theme-query-describe" required>主题描述：</label>
+                <input type="text" class="form-control" id="theme-query-describe" placeholder="绿色的树叶">
+            </div>
+            <button id="theme-query-btn" type="button" class="btn btn-primary margin-left-label" >查询</button>
+        </div>
+
+        <div class="query-body-2">
+            <table id="theme-query-table" class="table table-bordered table-hover"></table>
+        </div>
+
+    </div>
+
+
+
+    <script type="text/javascript">
+        // 默认主题的主键id
+        var primaryId = "";
+
+        /**
+         * 查询按钮
+         */
+        $('#theme-query-btn').click(function(){
+            $('#theme-query-table').bootstrapTable('refresh');
+        })
+
+        /**
+         * 操作栏 的转换
+         * @param value
+         * @param row
+         * @param index
+         * @returns {string}
+         */
+        function operateFormatter(value, row, index) {
+            let arr_start = [
+                '<div class="operate-btn-group">',
+            ];
+
+            let arr_btn_2 = [
+                '<div class="td-btn-div">',
+                `<button type="button" class="btn btn-info update-btn"  singleSelected=true onclick="updateTheme(${row.id}, this)">修 改</button>`,
+                '</div>'
+            ]
+            let arr_btn_3 = [
+                '<div class="td-btn-div">',
+                `<button type="button" class="btn btn-danger"  singleSelected=true onclick="removeTheme(${row.id})">删 除</button>`,
+                '</div>'
+            ]
+            let arr_end = [
+                '</div>',
+            ];
+
+            if (!row.isUse) {
+                let arr_btn_1 = [
+                    '<div class="td-btn-div">',
+                    `<button type="button" class="btn btn-primary"  singleSelected=true onclick="defaultTheme(${row.id})">设置默认</button>`,
+                    '</div>'
+                ]
+                return arr_start.concat(arr_btn_1).concat(arr_btn_2).concat(arr_btn_3).concat(arr_end).join('');
+            } else {
+                // 设置id到全局变量
+                primaryId = row.id;
+                let arr_btn_1 = [
+                    '<div class="td-btn-div">',
+                    '</div>'
+                ]
+                return arr_start.concat(arr_btn_1).concat(arr_btn_2).concat(arr_btn_3).concat(arr_end).join('');
+            }
+
+        }
+
+        var queryParams = {
+            theme: $("#theme-query-name").val(),
+            describes:$("#theme-query-describe").val()
+        }
+
+        var columns = [
+            {   title:'序号',
+                align: 'center',
+                width: 5,
+                formatter: function (value, row, index) {
+                    return index+1;
+                }
+            },
+            {
+                title:'主题名称',
+                field:'theme',
+                align: 'left',
+                width: 10,
+                formatter:function(value , row, index){
+                    return `<span>${value}</span>`;
+                }
+            },
+            {
+                title:'主题颜色',
+                field:'themeColor',
+                align: 'left',
+                width: 20,
+                formatter:function(value,row,index){
+                    return `${value}<span class="bgcolor" style="background-color: ${value}"></span>`
+                }
+            },
+            {
+                title:'主题描述',
+                field:'describes',
+                align: 'left',
+                width: 40,
+                formatter:function(value , row, index){
+                    return `<span>${value}</span>`;
+                }
+            },
+            {
+                title:'是否使用',
+                field:'isUse',
+                align: 'center',
+                width: 10,
+            },
+            {
+                title:'录入时间',
+                field:'createTime',
+                align: 'center',
+                width: 20,
+            },
+            {
+                title:"最后修改时间",
+                field:'modifiedTime',
+                align: 'center',
+                width: 20,
+        },
+            {
+            title:"操作",
+            align: 'center',
+            width: 30,
+            formatter: operateFormatter
+        }
+        ]
+        // 表格
+        bootstrapTable($('#theme-query-table'), "/system/themeQuery",queryParams,columns);
+
+
+    </script>
+
+    <!--操作数据的方法-->
+    <script type="text/javascript">
+
+        function defaultTheme(id) {
+            $.ajax({
+                url:"/system/updateThemeUse",
+                data:{primaryId:primaryId, id:id},
+                headers:{token:TOKEN},
+                datType:"json",
+                type:"post",
+                success:function(data){
+                  if (data.code != "00000") {
+                      swal("使用主题失败！",{
+                          icon: "warning",
+                      })
+                  } else {
+                      swal("使用主题成功！",{
+                          icon: "success",
+                      })
+                      $('#theme-query-table').bootstrapTable('refresh');
+                  }
+                }
+            })
+        }
+
+        /**
+         * 删除指定行主题
+         * @param id
+         */
+        function removeTheme(id) {
+            // 1.获取删除行数据
+            var row = $('#theme-query-table').bootstrapTable('getRowByUniqueId',id);
+            if (row.isUse) {
+                swal({
+                    title: "错误!",
+                    text: "你不能删除正在使用的主题!",
+                    icon: "error",
+                    button: "关 闭",
+                })
+            } else {
+                swal({
+                    title: "确认删除该主题吗?",
+                    text: "删除主题后，将不能恢复！",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url:"/system/removeTheme",
+                            data:{id:id},
+                            type:"post",
+                            headers: {token : TOKEN},
+                            dataType:"json",
+                            success:function(data){
+                                // console.log(data);
+                                if (data.code == "00000") { // 返回不正确
+                                    swal("删除成功!", {
+                                        icon: "success",
+                                    });
+                                    // 页面上删除数据，不在请求后台刷新页面，避免过多的IO
+                                    $('#theme-query-table').bootstrapTable('remove', {
+                                        field: "id",   //此处的 “id”对应的是字段名
+                                        values: [id]
+                                    });
+                                } else {
+                                    swal("删除失败!", {
+                                        icon: "warning",
+                                    });
+                                }
+
+                            }
+                        })
+                    } else {
+                        swal("删除操作已取消!");
+                    }
+                });
+            }
+
+
+        }
+
+
+        /**
+         * 更新行数据
+         * @param id
+         */
+        function updateTheme(id, obj) {
+
+            // 按钮
+            var $btn = $(obj)
+            // 主题名
+            var $theme = $(obj).parent().parent().parent().parent().children('td').eq(1).find('span');
+            // 主题描述
+            var $describes = $(obj).parent().parent().parent().parent().children('td').eq(3).find('span');
+
+            // 保存修改前的值
+
+            if ($btn.attr("click-type") != 1) { // 第一次点击是修改
+                $btn.html("保 存");
+                $btn.attr("click-type","1"); // 保存按钮 属性是1
+                $btn.removeClass("btn-info");
+                $btn.addClass("btn-success");
+
+
+                $theme.editable({
+                    type: 'text',
+                    title: '输入新主题名',
+                    validate: function (v) {
+                        if (!v) {
+                            return '主题名称不能为空';
+                        }
+                    }
+                });
+                $describes.editable({
+                    type: 'text',
+                    title: '修改主题的描述',
+                    validate: function (v) {
+                        if (!v) {
+                            return '主题名称不能为空';
+                        }
+                    }
+                });
+
+            } else { // 保存
+                // 这里获取的是为保存的值
+                var row = $('#theme-query-table').bootstrapTable('getRowByUniqueId',id);
+
+                $btn.html("修 改");
+                $btn.attr("click-type","0");
+                $btn.removeClass("btn-success");
+                $btn.addClass("btn-info");
+
+                editableDestory($theme);
+                editableDestory($describes);
+                // 修改最后修改时间
+                var $modifiedTime = $(obj).parent().parent().parent().parent().children('td').eq(6);
+
+                $modifiedTime.text(nowDateToString());
+
+                console.log($theme.text(), $describes.text(),$modifiedTime.text());
+
+                // 判断数据是否发生了改变
+                let isChange = row.describes != $describes.text() ||  row.theme != $theme.text();
+                if (isChange) {
+                    $.ajax({
+                        url:"/system/updateTheme",
+                        data:{id:id,theme:$theme.text(), describes: $describes.text(),modifiedTime:$modifiedTime.text()},
+                        dataType:"json",
+                        headers: {token : TOKEN},
+                        type:"post",
+                        success:function(data){
+                            if (data.code != "00000") {
+                                swal("修改失败!", {
+                                    icon: "warning",
+                                });
+                            } else {
+                                swal("修改成功!", {
+                                    icon: "success",
+                                });
+                            }
+                        }
+                    })
+                } else {
+                    swal("修改成功!", {
+                        icon: "success",
+                    });
+                }
+
+
+            }
+        }
+
+        /**
+         * 删除元素绑定的exitable
+         * @param obj
+         */
+        function editableDestory (obj) {
+
+            // 先替换dom内容
+            let value = obj.text()
+            obj.parent().html(`<span>${value}</span>`)
+            // 再销毁editable 顺序换了会报错
+            obj.editable("destroy");
+        }
+
+        /**
+         * 将当前时间转换成 字符串
+         * @returns {string} yyyy-MM-dd HH:mm:ss
+         */
+        function nowDateToString(){
+            var now = new Date();
+            let year = now.getFullYear();
+            let month = now.getMonth() + 1;
+            let day = now.getDate();
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds()
+
+            return year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
+
+        }
+
+    </script>
+</body>
+
+</html>

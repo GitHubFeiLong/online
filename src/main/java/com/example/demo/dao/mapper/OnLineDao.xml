@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.OnLineDao">
+
+    <insert id="insertDWZ">
+        insert into online_dwz values(
+        #{id}, #{cwz}, #{dwz}, #{minute}, #{createTime}, #{modifiedTime})
+    </insert>
+
+    <delete id="deleteCwz">
+        delete from online_dwz where id=#{id}
+    </delete>
+    <select id="listDWZ" resultType="com.example.demo.entry.dto.DWZDTO">
+        select * from online_dwz
+    </select>
+</mapper>

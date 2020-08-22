@@ -1,0 +1,46 @@
+{
+  "token": {
+    "// localStorage 中设置token字符串的key": "",
+    "LOCAL_STORAGE_TOKEN": "token",
+
+    "// localStorage 设置变量的时间 30天": "",
+    "LOCAL_STORAGE_TOKEN_EXPIRES" : 2592000000
+  },"// 文件说明 前端的配置文件": "",
+  "isShowLoginUser": true,"//": "是否显示登录用户",
+  "EWM_EXPIRED" : 10000,"// 登录页二维码过期时间 单位毫秒": "",
+  "// 用户登录后，会员等级的" : "",
+  "VIP_LIST" : [
+    {"// 普通会员": "","level": 1, "style" : "background-position:-85px -38px; width:45px"},
+    {"// 普通会员到期": "","level": -1, "style" : "background-position:-85px -18px; width:45px"},
+    {"// 黄金会员": "","level": 2, "style" : "background-position:0px -59px; width:65px"},
+    {"// 黄金会员到期": "","level": -2, "style" : "background-position:0px -38px; width:65px"},
+    {"// 普通企业会员": "","level": 3, "style" : "background-position:-85px 0px; width:47px"},
+    {"// 砖石企业会员": "","level": 4, "style" : "background-position:0px -18px; width:65px"},
+    {"// 试用黄金会员": "","level": 5, "style" : "background-position:0px 0px; width:85px"}
+  ],
+  "// 用户登录后的下拉框功能按钮": "",
+  "FUNCTION_LIST": [
+      {"1":{"x":"0px","y":"0px","text": "上门换新"}},
+      {"2":{"x":"-59px","y":"0px","text": "免费试用"}},
+      {"3":{"x":"-118px","y":"0px","text": "运费双免"}},
+      {"4":{"x":"-176px","y":"0px","text": "闪电退款"}},
+      {"5":{"x":"-235px","y":"0px"}},
+      {"6":{"x":"0px","y":"-58px","text": "运费单免"}},
+      {"7":{"x":"-59px","y":"-58px","text": "运费单免"}},
+      {"8":{"x":"-118px","y":"-58px","text": "运费双免"}},
+      {"9":{"x":"-176px","y":"-58px","text": "免费试用", "style": "color:white;background-color:#ceaa62"}},
+      {"10":{"x":"-235px","y":"-58px"}},
+      {"11":{"x":"0px","y":"-117px","text": "生日特权"}},
+      {"12":{"x":"-59px","y":"-117px","text": "生日特权"}},
+      {"13":{"x":"-118px","y":"-117px","text": "闪电退款"}},
+      {"14":{"x":"-176px","y":"-117px","text": "上门换新"}},
+      {"15":{"x":"-235px","y":"-117px"}},
+      {"16":{"x":"0px","y":"-176px","text": "京享值礼包"}},
+      {"17":{"x":"-59px","y":"-176px","text": "京享值礼包"}},
+      {"18":{"x":"-118px","y":"-176px","text": "贵宾专线"}},
+      {"19":{"x":"-176px","y":"-176px","text": "贵宾专线"}},
+      {"20":{"x":"-235px","y":"-176px"}},
+      {"21":{"x":"0px","y":"-233px"}}
+    ]
+
+}

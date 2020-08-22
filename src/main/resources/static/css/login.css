@@ -1,0 +1,459 @@
+:root {
+    --body-background: linear-gradient(180deg, #b7333340, rgba(21, 254, 82, 0));
+    --login-prompt-bgcolor: #fff8f0;
+}
+/*平板*/
+@media only screen and (max-width: 768px) {
+    .login-header-center-left{
+        padding-left: 0px !important;
+    }
+    .login-header-center-center{
+        display: flex;
+        justify-content: center;
+    }
+    .login-header-center-right{
+        padding-left: 0px !important;
+    }
+
+}
+/*平板Pro*/
+@media only screen and (max-width: 1024px) {
+    #login-header-center-center-div{
+        right: 25%;
+    }
+    .login-header-center-right{
+         padding-left: unset !important;
+    }
+
+}
+
+
+
+body {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: auto;
+    background: white;
+    color: #999;
+    font: 12px/150% Arial, Verdana, "\5b8b\4f53";
+    font-style: normal;
+    font-variant-ligatures: normal;
+    font-variant-caps: normal;
+    font-variant-numeric: normal;
+    font-variant-east-asian: normal;
+    font-weight: normal;
+    font-stretch: normal;
+    font-size: 12px;
+    line-height: 150%;
+    font-family: Arial, Verdana, 宋体;
+}
+
+#login-header {
+    width: 100%;
+    height: 80px;
+}
+
+.row {
+    height: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    /*margin-right: 0px !important;*/
+    /*margin-left: 0px !important;*/
+}
+
+#login-header-row-1 {
+    height: 80px;
+}
+
+div[class^="col-"] {
+    /*border:1px solid red;*/
+}
+
+a {
+    color: #666;
+    text-decoration: none;
+}
+
+#login-header-center {
+    height: 100%;
+}
+
+.login-header-center-left {
+    padding-left: 55px;
+}
+
+.login-header-center-left-img {
+    padding-top: 10px
+}
+
+.login-header-center-center {
+    position: relative;
+}
+
+.login-header-center-center {
+    padding-left: 60px;
+}
+
+#login-header-center-center-div {
+    font-size: 30px;
+    color: black;
+    font-family: -webkit-body;
+    line-height: 80px;
+    position: absolute;
+    margin-top: 10px;
+}
+
+.login-header-center-right {
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 10px;
+    padding-left: 160px;
+
+}
+
+.login-header-center-right > div {
+    width: 100%;
+    height: 18px;
+}
+
+#login-header-row-2 {
+    color: #999;
+    font-size: 12px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    background: #fff8f0;
+    /*width: 100%;*/
+}
+
+#login-header-row-2 i {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: -3px;
+    background-image: url("/image/login/icon-tips.png");
+}
+
+#login-header-row-3 {
+    height: 475px;
+    background: #e93854;
+}
+
+#login-body {
+    height: 100%;
+}
+
+.login-body-bg {
+    background: url("/image/login/5aa68632Nd7790d0c.png");
+    background-repeat: no-repeat;
+    margin-left: 25px;
+    height: 475px;
+}
+
+#login-body-info {
+    z-index: 4;
+    background: #fff;
+    width: 350px;
+    height: 428px;
+    float: right;
+    top: 15px;
+    position: relative;
+}
+
+#login-body-info > div:nth-child(1) {
+    height: 40px;
+    background: var(--login-prompt-bgcolor);
+}
+
+/*扫码登录 账号登录*/
+#login-body-info > div:nth-child(2) {
+    height: 55px;
+    border-bottom: 1px solid #f4f4f4;
+    display: flex;
+}
+
+#login-body-info > div:nth-child(2) div {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#login-body-info > div:nth-child(2) div a {
+    font-size: 18px;
+    font-family: "microsoft yahei";
+}
+
+/*登录选择样式*/
+.login-a {
+    font-weight: 700;
+    color: #e4393c;
+}
+
+#loggin-div {
+    width: 100%;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*justify-content: space-around;*/
+}
+
+#login-body-info > div:nth-child(4) {
+    width: 100%;
+    height: 50px;
+    border-top: 1px solid #f4f4f4;
+    /*height: auto;*/
+    background-color: #fcfcfc;
+    display: flex;
+}
+
+#login-body-info {
+    font-size: 12px;
+    text-align: center;
+    line-height: 40px;
+}
+
+#login-body-info .head i {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: -3px;
+    background-image: url("/image/login/icon-tips.png");
+}
+
+.ewm {
+    /*width:100%;*/
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    height: 167px;
+}
+
+.ewm-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ewm-left img {
+    vertical-align: middle;
+}
+
+.ewm-right {
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.ewm-right img {
+    vertical-align: middle;
+}
+
+.ewm div {
+    width: 176px;
+}
+
+.ewm-bottom span {
+    color: #e4393c;
+}
+
+.ewm-features {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.ewm-features > div {
+    width: 33%;
+    margin-right: 10px;
+}
+
+.ewm-features > div b {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    position: relative;
+    margin-bottom: -7px;
+}
+
+.ewm-features > div span {
+    font-family: "microsoft yahei";
+    color: #999;
+    line-height: 25px;
+    font-size: 15px;
+}
+
+.icon-1 {
+    background: url("/image/login/qr-coagent_01.png");
+}
+
+.icon-2 {
+    background: url("/image/login/qr-coagent_02.png");
+}
+
+.icon-3 {
+    background: url("/image/login/qr-coagent_03.png");
+}
+
+
+.lxfs-div {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 20px;
+}
+
+.lxfs-div b {
+    width: 19px;
+    height: 18px;
+    display: inline-block;
+    position: relative;
+    margin-bottom: -3px;
+
+}
+
+/*用户名密码登录*/
+div[class^="entry-"] {
+    width: 304px;
+    height: 38px;
+}
+
+.bottom-icon {
+    width: 39px;
+    height: 38px;
+}
+
+#login_username, #login_password {
+    border: 0;
+    width: 254px;
+    font-size: 14px;
+    font-family: '\5b8b\4f53';
+    border: 1px solid #eaeaea;
+    padding-left: 20px;
+}
+
+#loggin-div .entry-login {
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+}
+
+#loggin-div > div[class='entry-login']:nth-child(1) {
+    margin-top: 30px;
+}
+
+#loggin-div > div[class='entry-login']:nth-child(2) {
+    margin-top: 20px;
+}
+
+.enter-forget-password {
+    width: 297px;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0 15px 0px;
+}
+
+.enter-button, .enter-button input {
+
+}
+
+.enter-button {
+    width: 304px;
+    height: 35px !important;
+    border: 1px solid #cb2a2d;
+    margin-bottom: 30px;
+}
+
+.enter-button input {
+    border: 1px solid #e85356;
+    width: 303px;
+    height: 33px !important;
+    background: #e4393c;
+    line-height: 31px;
+    color: #fff;
+    font-size: 20px;
+    font-family: 'Microsoft YaHei';
+}
+
+
+.icon-qq {
+    background: url("/image/login/QQ-weixin_01.png");
+}
+
+.icon-wx {
+    background: url("/image/login/QQ-weixin_02.png");
+}
+
+
+.zc {
+    width: 60%;
+    color: #b61d1d;
+    font-size: 14px;
+}
+
+.zc > div {
+    float: right;
+    position: relative;
+    margin-right: 20px;
+    height: 100%;
+    line-height: 50px;
+}
+
+.zc b {
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    position: relative;
+    margin-bottom: -3px;
+}
+
+.icon-zc {
+    background: url("/image/login/regist.png");
+}
+
+.links{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.links a {
+    margin: 0px 10px 0px 10px;
+}
+
+#foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 90px;
+    flex-direction: column;
+}
+
+#ewm-mask {
+    width: 176px;
+    height: 167px;
+    background: rgba(0, 0, 0, 0.5);
+    margin-top: 20px;
+    position: absolute;
+    display: none;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#regist_span {
+    cursor: pointer;
+}
+#remember_password{
+    margin-top: 13px;
+}
